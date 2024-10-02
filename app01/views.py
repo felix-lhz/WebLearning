@@ -28,3 +28,4 @@ def login(request):
         return redirect("http://www.baidu.com")
     
     return render(request, "login.html", {"error": "用户名或密码错误"})
+    
