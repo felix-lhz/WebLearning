@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScripts</title>
+    <link rel="stylesheet" href="static/css/common.css">
+</head>
+<body>
+
+<!-- runningHorseLamp -->
+<span id="txt">欢迎中国联通领导莅临指导</span>
+<script type="text/javascript">
+    function show() {
+        // 1.去HTML中找到某个标签并获取他的内容（DOM）
+        var tag = document.getElementById("txt");
+        var dataString = tag.innerText;
+
+        // 2.动态起来，把文本中的第一个字符放在字符串的最后面。
+        var firstChar = dataString[0];
+        var otherString = dataString.substring(1, dataString.length);
+        var newText = otherString + firstChar;
+
+        // 3.在HTML标签中更新内容
+        tag.innerText = newText;
+    }
+    // JavaScript中的定时器，如：每1s执行一次show函数。
+    setInterval(show, 200);
+</script>
+
+<!-- 动态数据 -->
+<ul id="city">
+    <!--<li>北京</li> -->
+</ul>
+<script type="text/javascript">
+// 发送网络请求，获取数据
+    var cityList = ["北京","上海","深圳"];
+    for(var idx in cityList){
+        var text = cityList[idx];
+        // 创建 <li></li>
+        var tag = document.createElement("li");
+        // 在li标签中写入内容
+        tag.innerText = text;
+        // 添加到id=city那个标签的里面。DOM
+        var parentTag = document.getElementById("city");
+        parentTag.appendChild(tag);
+    }
+</script>
+
+<!-- 动态表格 -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>年龄</th>
+    </tr>
+    </thead>
+    <tbody id="body">
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    // 网络请求获取，写入到页面上。
+    var dataList = [
+        {id: 1, name: "郭智1", age: 19},
+        {id: 2, name: "郭智2", age: 19},
+        {id: 3, name: "郭智3", age: 19},
+        {id: 4, name: "郭智4", age: 19},
+        {id: 5, name: "郭智5", age: 19},
+    ];
+    for (var idx in dataList) {
+        var info = dataList[idx];
+
+        var tr = document.createElement("tr");
+        for (var key in info) {
+            var text = info[key];
+            var td = document.createElement('td');
+            td.innerText = text;
+            tr.appendChild(td);
+        }
+
+        var bodyTag = document.getElementById("body");
+        bodyTag.appendChild(tr);
+    }
+</script>
+
+<!-- 事件绑定 -->
+<body>
+<input type="text" placeholder="请输入内容" id="User"/>
+<input type="button" value="点击添加" onclick="addCityInfo()">
+<ul id="city">
+
+</ul>
+<script type="text/javascript">
+    function addCityInfo() {
+        // 1.找到输入标签
+        var txtTag = document.getElementById("User");
+        // 2.获取input框中用户输入的内容
+        var newString = txtTag.value;
+        // 判断用户输入是否为空，只有不为空才能继续。
+        if (newString.length > 0) {
+            // 3.创建标签 <li></li> 中间的文本信息就是用户输入的内容
+            var newTag = document.createElement("li");
+            newTag.innerText = newString;
+            // 4.标签添加到ul中
+            var parentTag = document.getElementById("city");
+            parentTag.appendChild(newTag);
+            // 3.将input框内容清空
+            txtTag.value = "";
+        }else{
+            alert("输入不能为空");
+        }
+    }
+</script>
+
+<!-- jQuery -->
+<div class="menus">
+    <div class="item">
+        <div class="header" onclick="clickMe(this);">上海</div>
+        <div class="content hide">
+            <a>宝山区</a>
+            <a>青浦区</a>
+            <a>浦东新区</a>
+            <a>普陀区</a>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="header" onclick="clickMe(this);">北京</div>
+        <div class="content hide">
+            <a>海淀区</a>
+            <a>朝阳区</a>
+            <a>大兴区</a>
+            <a>昌平区</a>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="header" onclick="clickMe(this);">上海2</div>
+        <div class="content hide">
+            <a>宝山区</a>
+            <a>青浦区</a>
+            <a>浦东新区</a>
+            <a>普陀区</a>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="header" onclick="clickMe(this);">北京2</div>
+        <div class="content hide">
+            <a>海淀区</a>
+            <a>朝阳区</a>
+            <a>大兴区</a>
+            <a>昌平区</a>
+        </div>
+    </div>
+</div>
+<script src="static/js/jquery-3.6.0.min.js"></script>
+<script>
+        function clickMe(self) {
+            /*var hasHide = $(self).next().hasClass("hide");
+            if(hasHide){
+                $(self).next().removeClass("hide");
+            }else{
+                $(self).next().addClass("hide");
+            }*/
+        // 让自己下面的功能展示出来
+        $(self).next().removeClass("hide");
+        // 找父亲，父亲的所有兄弟，再去每个兄弟的子孙中寻找 class=content，添加hide样式
+        $(self).parent().siblings().find(".content").addClass("hide");
+        }
+</script>
+
+<!-- 动态创建数据 -->
+<input type="text" id="txtUser" placeholder="用户名">
+<input type="text" id="txtEmail" placeholder="邮箱">
+<input type="button" value="提交" onclick="getInfo()"/>
+
+<ul id="view">
+</ul>
+<script src="static/js/jquery-3.6.0.min.js"></script>
+<script>
+    function getInfo() {
+        // 1.获取用户输入的用户名和邮箱
+        var username = $("#txtUser").val();
+        var email = $("#txtEmail").val();
+        var dataString = username + " - " + email;
+
+        // 2.创建li标签，在li的内部写入内容。 $("<li>")
+        var newLi = $("<li>").text(dataString);
+
+        // 3.把新创建的li标签添加到ul里面。
+        $("#view").append(newLi);
+
+        // 4.清除文本框中的文字
+        $("#txtUser").val('');
+        $("#txtEmail").val('');
+    }
+</script>
+
+<!-- 动态删除数据 -->
+<ul>
+    <li>百度</li>
+    <li>谷歌</li>
+    <li>搜狗</li>
+</ul>
+<script src="static/js/jquery-3.6.0.min.js"></script>
+<script>
+    $("li").click(function () {
+        $(this).remove();
+    });
+</script>
+
+<!-- 表格操作 -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>武沛齐</td>
+        <td>
+            <input type="button" value="删除" class="delete"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>武沛齐</td>
+        <td>
+            <input type="button" value="删除" class="delete"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>武沛齐</td>
+        <td>
+            <input type="button" value="删除" class="delete"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>武沛齐</td>
+        <td>
+            <input type="button" value="删除" class="delete"/>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<script src="static/js/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        //找到所有class=delete的标签，绑定事件
+        $(".delete").click(function () {
+            // 删除当前行的数据
+            $(this).parent().parent().remove();
+        });
+    })
+</script>
+
+</body>
+</html>
