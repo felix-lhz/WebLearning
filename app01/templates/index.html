@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Page</title>
     <link href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
 </head>
 <body>
@@ -23,10 +23,10 @@
         </div>
         <div class="row w-100">
             <div class="col-6 text-right">
-                <a href="{% url 'login' %}" class="btn btn-primary">Log in <i class="fa fa-arrow-right"></i></a>
+                <a href="{% url 'login' %}" class="btn btn-index">Log in <i class="fa fa-arrow-right"></i></a>
             </div>
             <div class="col-6 text-left">
-                <a href="{% url 'register' %}" class="btn btn-primary">Register <i class="fa fa-arrow-right"></i></a>
+                <a href="{% url 'register' %}" class="btn btn-index">Register <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
