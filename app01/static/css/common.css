@@ -66,6 +66,18 @@ html {
     /* 黑色阴影 */
 }
 
+.login-container {
+    position: relative;
+    /* 确保 .login-container 是相对定位 */
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: auto auto auto auto;
+    width: fit-content;
+    /* 根据内容自动调整宽度 */
+}
+
 /* 通用按钮样式 */
 .btn {
     display: inline-block;
@@ -73,7 +85,6 @@ html {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, border-color 0.3s;
-    position: relative;
     overflow: hidden;
     font-size: 18px;
     /* 默认字体大小 */
@@ -119,7 +130,6 @@ html {
     border: 2px solid #f04949;
     background-color: rgba(240, 73, 73, 0.2);
     opacity: 0.9;
-    margin-left: 20px;
 }
 
 .btn-login:hover {
@@ -156,10 +166,12 @@ html {
 }
 
 .date-time {
-    position: fixed;
-    top: 15px;
-    left: 30%;
-    margin-top: 10%;
+    position: absolute;
+    /* 相对于最近的相对定位的祖先元素定位 */
+    top: -10px;
+    /* 向上移动50像素 */
+    margin-left: auto;
+    margin-right: auto;
     color: white;
     background-color: rgba(255, 255, 255, 0.01);
     /* 低透明度背景 */
@@ -177,14 +189,6 @@ html {
 .date-time:hover {
     border: 2px solid rgba(255, 255, 255, 0.5);
     /* 鼠标悬停时的边框颜色 */
-}
-
-.login-container {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 35%;
 }
 
 .highlight {
