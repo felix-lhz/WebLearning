@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login
+from app01.forms.userForm import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 
 def login(request):
@@ -24,8 +25,14 @@ def login(request):
 
 # 注册页面的视图函数（需要实现）
 def register(request):
-    # 实现注册逻辑
-    pass
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # 重定向到登录页面
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})
 
 # 忘记密码页面的视图函数（需要实现）
 def forgot_password(request):
